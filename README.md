@@ -1,4 +1,3 @@
-
 <h1 align="center"> DevLinks </h1>
 
 <p align="center">
@@ -42,13 +41,17 @@ O DevLinks é um agregador de links para usar como cartão de visitas online.
 
 Você pode visualizar o layout do projeto através [DESSE LINK](https://www.figma.com/community/file/1187422022288947321). É necessário ter conta no [Figma](https://figma.com) para acessá-lo.
 
-## :memo: Licença
+## ℹ️ Como acessar o portfólio
 
-Esse projeto está sob a licença MIT.
+Você pode acessar seu portfólio das seguintes formas:
 
----
+- **Localmente:**  
+  Abra o arquivo `index-evangelista.html` no seu navegador, ou utilize uma extensão como Live Server no VSCode e acesse:  
+  `http://localhost:5500/index-evangelista.html`
 
-Feito com ♥ by Rocketseat :wave: [Participe da nossa comunidade!](https://discord.gg/rocketseat)
+- **Online (GitHub Pages):**  
+  Se você publicar este projeto no GitHub Pages, o link será:  
+  `https://nebulosaorion.github.io/portifolio/index-evangelista.html`
 
 ## :memo: Licença
 
