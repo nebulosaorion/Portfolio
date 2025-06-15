@@ -41,14 +41,6 @@ A página exibe:
 
 ![Captura de tela do projeto](./assets/screenshot.png)
 
-## 👤 Desenvolvedora
-
-- **Nome**: Miriã Evangelista  
-- **Instagram**: [@cetica73](https://www.instagram.com/cetica73/)  
-- **GitHub**: [@nebulosaorion](https://github.com/nebulosaorion)  
-- **LinkedIn**: [Miriã Evangelista](https://www.linkedin.com/in/miriã-evangelista)
-
----
 
 
 ![Captura de tela 2024-11-12 215301](https://github.com/user-attachments/assets/60e51247-22d8-4eda-84c7-95cadf6cf33f)
