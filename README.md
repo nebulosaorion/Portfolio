@@ -47,7 +47,7 @@ Você pode visualizar o layout do projeto através [DESSE LINK](https://www.figm
 Você pode acessar seu portfólio das seguintes formas:
 
 - **Localmente:**  
-  Abra o arquivo `index-evangelista.html` no seu navegador, ou utilize uma extensão como Live Server no VSCode e acesse:  
+  Abra o arquivo `index.html` no seu navegador, ou utilize uma extensão como Live Server no VSCode e acesse:  
   `http://localhost:5500/index-evangelista.html`
 
 - **Online (GitHub Pages):**  
