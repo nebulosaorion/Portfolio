@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "recommendations": [
       "esbenp.prettier-vscode",
@@ -6,4 +7,14 @@
       "ritwickdey.LiveServer"
     ]
   }
+=======
+{
+    "recommendations": [
+      "esbenp.prettier-vscode",
+      "PKief.material-icon-theme",
+      "rocketseat.theme-omni",
+      "ritwickdey.LiveServer"
+    ]
+  }
+>>>>>>> 9e78fc60d30bbcc998cb03c7f5cb7ef2beaab78a
   
