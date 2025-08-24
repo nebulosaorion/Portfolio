@@ -31,30 +31,24 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==============================================
-  // ========== LÓGICA DO MENU MOBILE =============
+  // ======== LÓGICA DO "SOBRE MIM" EXPANSÍVEL ====
   // ==============================================
-  const menuToggle = document.querySelector('.menu-toggle');
-  const mobileMenu = document.querySelector('.mobile-menu');
-  const body = document.body;
+  const sobreSection = document.querySelector('#sobre');
+  const sobreHeader = document.querySelector('.sobre-header');
 
-  if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('open');
-      menuToggle.classList.toggle('active');
-      body.classList.toggle('overflow-hidden');
+  if (sobreHeader && sobreSection) {
+    sobreHeader.addEventListener('click', () => {
+      sobreSection.classList.toggle('open');
     });
-  }
 
-  const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
-  mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (mobileMenu.classList.contains('open')) {
-        mobileMenu.classList.remove('open');
-        menuToggle.classList.remove('active');
-        body.classList.remove('overflow-hidden');
+    // Opcional: Adiciona acessibilidade via teclado
+    sobreHeader.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        sobreSection.classList.toggle('open');
       }
     });
-  });
+  }
 
   // ==============================================
   // =========== LÓGICA DA ROLAGEM SUAVE ==========

@@ -135,7 +135,7 @@ header {
 }
 
 /* ============================================== */
-/* ============== SEÇÃO HOME (ATUALIZADA) ========= */
+/* ============== SEÇÃO HOME  ========= */
 /* ============================================== */
 .home {
   display: flex;
@@ -193,7 +193,7 @@ header {
   width: 520%;  
   height: 380px; 
   background-image: url('assets/forma.png');
-  background-size: cover; /* Alterado de 'contain' para 'cover' para esticar a imagem */
+  background-size: cover; 
   background-repeat: no-repeat;
   background-position: center;
   z-index: -1;
@@ -202,14 +202,6 @@ header {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para destaque */
 }
 
-.text-info .title {
-  font-family: 'DM Serif Text', serif; /* Alterado para DM Serif Text */
-  font-size: 1.5rem;
-  color: #4A154B; /* Alterado para preto */
-  position: relative;
-  z-index: 1;
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7); /* Adicionado contraste */
-}
 
 /* Ajuste para telas menores */
 @media (max-width: 900px) {
@@ -246,117 +238,7 @@ header {
     order: 1;
     z-index: 3;
   }
-  
-  .text-info .name::before {
-    width: 140%;
-    height: 120px;
-  }
-}
 
-
-/* ============================================== */
-/* ======== MENU HAMBÚRGUER E OVERLAY =========== */
-/* ============================================== */
-.menu-toggle {
-  background: none;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  padding: 0;
-  position: fixed;
-  top: 2rem;
-  right: 5%;
-  z-index: 1002;
-}
-
-.menu-toggle .material-symbols-outlined {
-  font-size: 36px;
-  color: var(--color-text);
-  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
-}
-
-.menu-toggle .icon-close {
-  display: none;
-}
-
-.menu-toggle.active .icon-menu {
-  display: none;
-}
-
-.menu-toggle.active .icon-close {
-  display: block;
-  color: white;
-  transform: rotate(180deg);
-}
-
-
-.mobile-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--color-primary);
-  z-index: 1001;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-100%);
-  transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-  font-family: var(--font-header);
-}
-
-.mobile-menu.open {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.mobile-nav-links {
-  list-style: none;
-  text-align: center;
-  padding: 0;
-}
-
-.mobile-nav-links li {
-  margin-bottom: 2rem;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.mobile-menu.open li {
-  opacity: 1;
-  transform: translateY(0);
-}
-.mobile-menu.open li:nth-child(1) { transition-delay: 0.2s; }
-.mobile-menu.open li:nth-child(2) { transition-delay: 0.3s; }
-.mobile-menu.open li:nth-child(3) { transition-delay: 0.4s; }
-.mobile-menu.open li:nth-child(4) { transition-delay: 0.5s; }
-.mobile-menu.open li:nth-child(5) { transition-delay: 0.6s; }
-
-
-.mobile-nav-links a {
-  color: white;
-  text-decoration: none;
-  font-size: 2rem;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-
-.mobile-nav-links a:hover {
-  color: var(--color-highlight);
-}
-
-@media (min-width: 768px) {
-  .menu-toggle, .mobile-menu {
-    display: none;
-  }
 }
 
 /* ============================================== */
@@ -505,4 +387,75 @@ footer {
   border-left: 5px solid var(--color-highlight);
 }
 
+@media (max-width: 1100px) {
+  .text-info .name::before {
+    width: 350%; /* Um valor intermediário para a largura */
+    height: 300px;
+  }
+}
 
+/* ============================================== */
+/* ======== ESTILOS PARA O SOBRE EXPANSÍVEL ======= */
+/* ============================================== */
+
+.sobre-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  /* Adicionado para que o cursor customizado reaja */
+  cursor: none; 
+}
+
+/* Remove a margem padrão do H2 para alinhar com a seta */
+.sobre-header h2 {
+  margin-bottom: 0;
+}
+
+.expand-icon {
+  font-size: 2.2rem; /* Ajusta o tamanho do ícone */
+  transition: transform 0.4s ease-in-out;
+  color: #6B2346;
+}
+
+.sobre-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+  padding: 0 2rem; /* Mantém o espaçamento lateral do parágrafo */
+}
+
+/* Quando a seção estiver aberta */
+#sobre.open .sobre-content {
+  max-height: 350px; /* Define uma altura máxima fixa para a caixa */
+  overflow-y: auto;  /* Cria a barra de rolagem vertical APENAS se o texto for maior que a caixa */
+  padding-top: 1.5rem;
+  padding-right: 1rem; /* Adiciona um espaço à direita para a barra de rolagem não esmagar o texto */
+}
+
+#sobre.open .expand-icon {
+  transform: rotate(180deg); /* Gira a seta para cima */
+}
+
+/* ============================================== */
+/* ===== ESTILO DA BARRA DE ROLAGEM (OPCIONAL) ==== */
+/* ============================================== */
+.sobre-content::-webkit-scrollbar {
+  width: 8px; /* Largura da barra */
+}
+
+.sobre-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1); /* Cor do fundo da trilha */
+  border-radius: 10px;
+}
+
+.sobre-content::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary); /* Usa a cor primária 
+  border-radius: 10px;
+}
+
+/* Estilo para o navegador Firefox */
+.sobre-content {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) transparent;
+}
