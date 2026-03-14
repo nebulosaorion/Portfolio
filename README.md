@@ -45,6 +45,6 @@ $ cd seu-repositorio
 
 Você pode entrar em contato comigo através dos seguintes canais:
 
-  * **LinkedIn:** [Miriã Evangelista](www.linkedin.com/in/engmi96)
+  * **LinkedIn:** [Miriã Evangelista](https://www.linkedin.com/in/engmi96/)
   * **GitHub:** [@nebulosaorion](https://github.com/nebulosaorion)
   * **E-mail:** [evangelista@furg.br](mailto:evangelista@furg.br)
