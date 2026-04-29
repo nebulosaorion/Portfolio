@@ -85,17 +85,16 @@ class _EstadoSpritePersonagem extends State<SpritePersonagem>
   late Animation<double> _xAnim;
   Timer? _frameTimer;
 
-  static const _msAndar = 160;
-  static const _msEmpurrar = 130;
-  static const _msAgachar = 170;
-  static const _msApoio = 220;
+  static const _msEmpurrar = 90;
+  static const _msAgachar = 110;
+  static const _msApoio = 150;
 
   @override
   void initState() {
     super.initState();
     _movimento = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 6000),
+      duration: const Duration(milliseconds: 4000),
     );
     _carregarImagem();
   }
@@ -136,8 +135,20 @@ class _EstadoSpritePersonagem extends State<SpritePersonagem>
     _xAnim = Tween<double>(begin: startX, end: targetX).animate(
       CurvedAnimation(parent: _movimento, curve: Curves.easeInOut),
     );
+
+    // Frames da caminhada dirigidos pela posição (não por tempo),
+    // para que os pés sempre sincronizem com a velocidade real do movimento.
+    const ciclosAndar = 6;
     _xAnim.addListener(() {
-      if (mounted) setState(() => _x = _xAnim.value);
+      if (!mounted) return;
+      setState(() {
+        _x = _xAnim.value;
+        if (_fase == _Fase.entrando) {
+          _frameIdx = (_movimento.value * ciclosAndar * _framesAndar.length)
+                  .toInt() %
+              _framesAndar.length;
+        }
+      });
     });
 
     setState(() {
@@ -147,18 +158,16 @@ class _EstadoSpritePersonagem extends State<SpritePersonagem>
       _frameIdx = 0;
     });
 
-    _agendarFrame();
     _movimento.forward().then((_) {
       if (mounted) _iniciarEmpurrar();
     });
   }
 
   int get _intervaloAtual => switch (_fase) {
-        _Fase.entrando => _msAndar,
         _Fase.empurrando => _msEmpurrar,
         _Fase.agachando => _msAgachar,
         _Fase.apoiando => _msApoio,
-        _ => _msAndar,
+        _ => _msEmpurrar,
       };
 
   void _agendarFrame() {
@@ -166,8 +175,6 @@ class _EstadoSpritePersonagem extends State<SpritePersonagem>
       if (!mounted) return;
       setState(() {
         switch (_fase) {
-          case _Fase.entrando:
-            _frameIdx = (_frameIdx + 1) % _framesAndar.length;
           case _Fase.empurrando:
             if (_frameIdx < _framesEmpurrar.length - 1) {
               _frameIdx++;
@@ -199,6 +206,7 @@ class _EstadoSpritePersonagem extends State<SpritePersonagem>
       _frameIdx = 0;
     });
     widget.onEmpurrar();
+    _agendarFrame();
   }
 
   @override
