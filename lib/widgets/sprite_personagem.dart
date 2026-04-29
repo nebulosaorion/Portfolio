@@ -180,26 +180,26 @@ class _EstadoSpritePersonagem extends State<SpritePersonagem>
 
   @override
   Widget build(BuildContext context) {
-    if (_fase == _Fase.aguardando || _imagem == null) {
-      return const SizedBox.shrink();
-    }
+    // Sempre ocupa o Stack inteiro (IgnorePointer não bloqueia interações).
+    // O CustomPainter desenha nas coordenadas absolutas do Stack,
+    // evitando problemas com Positioned dentro de StatefulWidget filho de Stack.
+    return IgnorePointer(
+      child: SizedBox.expand(
+        child: _imagem == null || _fase == _Fase.aguardando
+            ? null
+            : CustomPaint(painter: _buildPainter()),
+      ),
+    );
+  }
 
+  _SpritePainter _buildPainter() {
     final src = _srcAtual;
     final dw = src.width * _alturaDisplay / src.height;
-
-    // Durante a entrada usa _x animado; após, ancora na borda direita
     final left = _fase == _Fase.entrando ? _x : _bordaDireita - dw;
-
-    return Positioned(
-      left: left,
-      top: _y,
-      child: SizedBox(
-        width: dw,
-        height: _alturaDisplay,
-        child: CustomPaint(
-          painter: _SpritePainter(imagem: _imagem!, src: src),
-        ),
-      ),
+    return _SpritePainter(
+      imagem: _imagem!,
+      src: src,
+      dst: Rect.fromLTWH(left, _y, dw, _alturaDisplay),
     );
   }
 }
@@ -207,19 +207,24 @@ class _EstadoSpritePersonagem extends State<SpritePersonagem>
 class _SpritePainter extends CustomPainter {
   final ui.Image imagem;
   final Rect src;
+  final Rect dst;
 
-  const _SpritePainter({required this.imagem, required this.src});
+  const _SpritePainter({
+    required this.imagem,
+    required this.src,
+    required this.dst,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
     canvas.drawImageRect(
       imagem,
       src,
-      Rect.fromLTWH(0, 0, size.width, size.height),
+      dst,
       Paint()..filterQuality = FilterQuality.medium,
     );
   }
 
   @override
-  bool shouldRepaint(_SpritePainter old) => old.src != src;
+  bool shouldRepaint(_SpritePainter old) => old.src != src || old.dst != dst;
 }
