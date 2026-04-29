@@ -65498,10 +65498,10 @@ k.Y(new A.a8D(j))
 j.aG(new A.a8E(j,m,p.b+i-20))
 j.z.cI().aR(new A.a8F(j),t.P)},
 gZc(){var s,r=this.e
-A:{s=200
+A:{s=280
 if(B.jE===r)break A
-if(B.jF===r){s=260
-break A}if(B.jG===r){s=380
+if(B.jF===r){s=340
+break A}if(B.jG===r){s=520
 break A}break A}return s},
 ET(){this.as=A.c6(A.d_(0,this.gZc()),new A.a8A(this))},
 Z2(){var s=this
@@ -65550,7 +65550,7 @@ if(s.e===B.fx){r=s.z
 r===$&&A.a()
 r=r.x
 r===$&&A.a()
-s.y=B.f.aO(B.d.eg(r*4*8),8)}},
+s.y=B.f.aO(B.d.eg(r*3*8),8)}},
 $S:0}
 A.a8E.prototype={
 $0(){var s=this.a
