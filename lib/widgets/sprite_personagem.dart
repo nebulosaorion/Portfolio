@@ -85,7 +85,7 @@ class _EstadoSpritePersonagem extends State<SpritePersonagem>
   late Animation<double> _xAnim;
   Timer? _frameTimer;
 
-  static const _msAndar = 110;
+  static const _msAndar = 160;
   static const _msEmpurrar = 130;
   static const _msAgachar = 170;
   static const _msApoio = 220;
@@ -95,7 +95,7 @@ class _EstadoSpritePersonagem extends State<SpritePersonagem>
     super.initState();
     _movimento = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 4200),
+      duration: const Duration(milliseconds: 6000),
     );
     _carregarImagem();
   }
