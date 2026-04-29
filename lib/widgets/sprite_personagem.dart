@@ -68,7 +68,7 @@ class _EstadoSpritePersonagem extends State<SpritePersonagem>
     super.initState();
     _movimento = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 2800),
+      duration: const Duration(milliseconds: 4200),
     );
     _carregarImagem();
   }
@@ -125,8 +125,8 @@ class _EstadoSpritePersonagem extends State<SpritePersonagem>
       _frameIdx = 0;
     });
 
-    // 10 FPS para os frames do sprite
-    _frameTimer = Timer.periodic(const Duration(milliseconds: 100), _tickFrame);
+    // Ritmo mais lento para a caminhada parecer leve e deliberada.
+    _frameTimer = Timer.periodic(const Duration(milliseconds: 150), _tickFrame);
     _movimento.forward().then((_) {
       if (mounted) _iniciarEmpurrar();
     });
@@ -154,7 +154,7 @@ class _EstadoSpritePersonagem extends State<SpritePersonagem>
     });
     widget.onEmpurrar();
     // Após a animação de empurrar, vai para apoiando
-    Timer(const Duration(milliseconds: 800), () {
+    Timer(const Duration(milliseconds: 1100), () {
       if (!mounted) return;
       _frameTimer?.cancel();
       setState(() {

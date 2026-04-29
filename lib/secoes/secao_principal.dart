@@ -34,17 +34,17 @@ class _EstadoSecaoPrincipal extends State<SecaoPrincipal>
 
     _nudgeCtrl = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 600),
+      duration: const Duration(milliseconds: 850),
     );
     _nudgeAnim = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween(begin: 0.0, end: 22.0)
+        tween: Tween(begin: 0.0, end: 12.0)
             .chain(CurveTween(curve: Curves.easeOut)),
         weight: 40,
       ),
       TweenSequenceItem(
-        tween: Tween(begin: 22.0, end: 0.0)
-            .chain(CurveTween(curve: Curves.elasticOut)),
+        tween: Tween(begin: 12.0, end: 0.0)
+            .chain(CurveTween(curve: Curves.easeOutCubic)),
         weight: 60,
       ),
     ]).animate(_nudgeCtrl);
