@@ -6,34 +6,34 @@ import 'package:flutter/services.dart';
 
 enum _Fase { aguardando, entrando, empurrando, apoiando }
 
-// Rects de origem na spritesheet 1536×1024.
+// Rects de origem na spritesheet reempacotada.
 // Mapeamento usado:
 // - linha 0: caminhada
 // - linha 2: empurrando
 // - linha 3: repouso/ofegante
 const List<Rect> _framesAndar = [
-  Rect.fromLTWH(62, 0, 112, 204),
-  Rect.fromLTWH(262, 0, 104, 204),
-  Rect.fromLTWH(446, 0, 102, 204),
-  Rect.fromLTWH(639, 0, 103, 204),
-  Rect.fromLTWH(827, 0, 108, 204),
-  Rect.fromLTWH(1018, 0, 98, 204),
-  Rect.fromLTWH(1208, 0, 92, 204),
-  Rect.fromLTWH(1379, 0, 86, 204),
+  Rect.fromLTWH(63, 70, 97, 154),
+  Rect.fromLTWH(295, 68, 82, 156),
+  Rect.fromLTWH(514, 68, 92, 156),
+  Rect.fromLTWH(742, 66, 83, 158),
+  Rect.fromLTWH(961, 66, 94, 158),
+  Rect.fromLTWH(1189, 68, 86, 156),
+  Rect.fromLTWH(1411, 71, 90, 153),
+  Rect.fromLTWH(1638, 66, 83, 158),
 ];
 
 const List<Rect> _framesEmpurrar = [
-  Rect.fromLTWH(27, 408, 152, 204),
-  Rect.fromLTWH(254, 408, 130, 204),
-  Rect.fromLTWH(384, 408, 158, 204),
-  Rect.fromLTWH(576, 408, 157, 204),
-  Rect.fromLTWH(768, 408, 146, 204),
-  Rect.fromLTWH(1002, 408, 137, 204),
-  Rect.fromLTWH(1177, 408, 120, 204),
-  Rect.fromLTWH(1363, 408, 104, 204),
+  Rect.fromLTWH(44, 318, 136, 130),
+  Rect.fromLTWH(273, 318, 126, 130),
+  Rect.fromLTWH(464, 316, 192, 132),
+  Rect.fromLTWH(688, 316, 192, 132),
+  Rect.fromLTWH(915, 317, 186, 131),
+  Rect.fromLTWH(1168, 318, 127, 130),
+  Rect.fromLTWH(1392, 317, 128, 131),
+  Rect.fromLTWH(1617, 317, 126, 131),
 ];
 
-const Rect _frameIdle = Rect.fromLTWH(813, 612, 105, 204);
+const Rect _frameIdle = Rect.fromLTWH(967, 544, 81, 128);
 
 class SpritePersonagem extends StatefulWidget {
   final GlobalKey avatarKey;
@@ -227,7 +227,7 @@ class _SpritePainter extends CustomPainter {
       imagem,
       src,
       dst,
-      Paint()..filterQuality = FilterQuality.medium,
+      Paint()..filterQuality = FilterQuality.none,
     );
   }
 
