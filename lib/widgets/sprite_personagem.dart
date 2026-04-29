@@ -24,10 +24,10 @@ const List<Rect> _framesAndar = [
 
 const List<Rect> _framesEmpurrar = [
   Rect.fromLTWH(44, 318, 136, 130),
-  Rect.fromLTWH(273, 318, 126, 130),
-  Rect.fromLTWH(464, 316, 192, 132),
-  Rect.fromLTWH(688, 316, 192, 132),
-  Rect.fromLTWH(915, 317, 186, 131),
+  Rect.fromLTWH(270, 318, 132, 130),
+  Rect.fromLTWH(493, 316, 134, 132),
+  Rect.fromLTWH(721, 316, 126, 132),
+  Rect.fromLTWH(942, 317, 131, 131),
   Rect.fromLTWH(1168, 318, 127, 130),
   Rect.fromLTWH(1392, 317, 128, 131),
   Rect.fromLTWH(1617, 317, 126, 131),
