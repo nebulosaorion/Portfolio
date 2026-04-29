@@ -85,16 +85,16 @@ class _EstadoSpritePersonagem extends State<SpritePersonagem>
   late Animation<double> _xAnim;
   Timer? _frameTimer;
 
-  static const _msEmpurrar = 130;
-  static const _msAgachar = 170;
-  static const _msApoio = 220;
+  static const _msEmpurrar = 200;
+  static const _msAgachar = 260;
+  static const _msApoio = 380;
 
   @override
   void initState() {
     super.initState();
     _movimento = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 6000),
+      duration: const Duration(milliseconds: 9000),
     );
     _carregarImagem();
   }
@@ -138,7 +138,7 @@ class _EstadoSpritePersonagem extends State<SpritePersonagem>
 
     // Frames da caminhada dirigidos pela posição (não por tempo),
     // para que os pés sempre sincronizem com a velocidade real do movimento.
-    const ciclosAndar = 5;
+    const ciclosAndar = 4;
     _xAnim.addListener(() {
       if (!mounted) return;
       setState(() {
