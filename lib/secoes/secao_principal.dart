@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../tema.dart';
+import '../widgets/sprite_personagem.dart';
 
 class SecaoPrincipal extends StatefulWidget {
   const SecaoPrincipal({super.key});
@@ -15,8 +16,13 @@ class SecaoPrincipal extends StatefulWidget {
 }
 
 class _EstadoSecaoPrincipal extends State<SecaoPrincipal>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late AnimationController _pulso;
+  late AnimationController _nudgeCtrl;
+  late Animation<double> _nudgeAnim;
+
+  final _avatarKey = GlobalKey();
+  final _stackKey = GlobalKey();
 
   @override
   void initState() {
@@ -25,13 +31,33 @@ class _EstadoSecaoPrincipal extends State<SecaoPrincipal>
       vsync: this,
       duration: const Duration(milliseconds: 1500),
     )..repeat(reverse: true);
+
+    _nudgeCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+    _nudgeAnim = TweenSequence<double>([
+      TweenSequenceItem(
+        tween: Tween(begin: 0.0, end: 22.0)
+            .chain(CurveTween(curve: Curves.easeOut)),
+        weight: 40,
+      ),
+      TweenSequenceItem(
+        tween: Tween(begin: 22.0, end: 0.0)
+            .chain(CurveTween(curve: Curves.elasticOut)),
+        weight: 60,
+      ),
+    ]).animate(_nudgeCtrl);
   }
 
   @override
   void dispose() {
     _pulso.dispose();
+    _nudgeCtrl.dispose();
     super.dispose();
   }
+
+  void _onEmpurrar() => _nudgeCtrl.forward(from: 0);
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +68,7 @@ class _EstadoSecaoPrincipal extends State<SecaoPrincipal>
       width: double.infinity,
       height: altura,
       child: Stack(
+        key: _stackKey,
         fit: StackFit.expand,
         children: [
           Container(
@@ -64,7 +91,17 @@ class _EstadoSecaoPrincipal extends State<SecaoPrincipal>
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _AvatarAnimado(pulso: _pulso),
+                    AnimatedBuilder(
+                      animation: _nudgeAnim,
+                      builder: (_, child) => Transform.translate(
+                        offset: Offset(_nudgeAnim.value, 0),
+                        child: child,
+                      ),
+                      child: RepaintBoundary(
+                        key: _avatarKey,
+                        child: _AvatarAnimado(pulso: _pulso),
+                      ),
+                    ),
                     const SizedBox(height: 32),
                     Text(
                       'Miriã Evangelista',
@@ -114,6 +151,11 @@ class _EstadoSecaoPrincipal extends State<SecaoPrincipal>
                 ),
               ),
             ),
+          ),
+          SpritePersonagem(
+            avatarKey: _avatarKey,
+            stackKey: _stackKey,
+            onEmpurrar: _onEmpurrar,
           ),
         ],
       ),
