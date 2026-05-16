@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../dados/biografia.dart';
 import '../tema.dart';
 import 'compartilhado.dart';
 
@@ -11,30 +12,26 @@ class SecaoSobre extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: Cores.slate900.withAlpha(128),
-      child: const ContainerSecao(
+      child: ContainerSecao(
         filho: Column(
           children: [
-            TituloSecao(texto: 'Sobre Mim'),
-            SizedBox(height: 32),
+            const TituloSecao(texto: 'Sobre Mim'),
+            const SizedBox(height: 32),
             CartaoEscuro(
               filho: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _Biografia(
-                    texto: 'Olá! Meu nome é ',
-                    destaque: 'Miriã Evangelista',
-                    complemento:
-                        ', tenho 30 anos e sou natural de Rio Grande, RS. '
-                        'Faço graduação em Engenharia de Computação na Universidade Federal do Rio Grande (FURG), '
-                        'onde participo ativamente de projetos de pesquisa e desenvolvimento.',
-                  ),
-                  SizedBox(height: 16),
-                  _Biografia(
-                    texto:
-                        'Trabalho com modelagem de séries temporais, sempre explorando novas abordagens. '
-                        'No tempo livre, gosto de literatura, música e filmes, com preferência por suspense e ficção científica.',
-                  ),
-                ],
+                children: biografiaSobre
+                    .map(
+                      (item) => Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: _Biografia(
+                          texto: item.texto,
+                          destaque: item.destaque,
+                          complemento: item.complemento,
+                        ),
+                      ),
+                    )
+                    .toList(),
               ),
             ),
           ],

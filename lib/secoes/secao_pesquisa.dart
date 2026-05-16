@@ -1,31 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../dados/projetos_pesquisa.dart';
 import '../tema.dart';
 import 'compartilhado.dart';
 
 class SecaoPesquisa extends StatelessWidget {
   const SecaoPesquisa({super.key});
-
-  static const _projetos = [
-    (
-      titulo: 'CIEX – FURG',
-      periodo: '2025 – Atual',
-      descricao:
-          'Bolsista no projeto CIEX, iniciativa interinstitucional voltada para avaliação, prognóstico e mitigação de riscos de eventos extremos de inundação e estiagem, com foco na segurança da população dos municípios às margens da Lagoa dos Patos.',
-    ),
-    (
-      titulo: 'Veículo Autônomo para Controle de Ervas Daninhas',
-      periodo: '2024',
-      descricao:
-          'Bolsista no projeto Robô Inteligente, com pesquisa envolvendo veículo autônomo, dataset próprio e algoritmos de visão computacional para detecção e eliminação de ervas daninhas.',
-    ),
-    (
-      titulo: 'FURGBOT – Competições de Robótica',
-      periodo: '2023 – 2024',
-      descricao:
-          'Colaboradora na equipe de robótica FBOT, contribuindo para a formação curricular dos alunos e participação em competições nacionais e internacionais de robótica.',
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +17,7 @@ class SecaoPesquisa extends StatelessWidget {
           children: [
             const TituloSecao(texto: 'Projetos de Pesquisa'),
             const SizedBox(height: 48),
-            ...(_projetos.map(
+            ...(projetosPesquisa.map(
               (projeto) => Padding(
                 padding: const EdgeInsets.only(bottom: 16),
                 child: CartaoEscuro(

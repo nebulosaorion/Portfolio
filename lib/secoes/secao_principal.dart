@@ -4,8 +4,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../tema.dart';
+import '../util/abridor_link.dart';
 
 class SecaoPrincipal extends StatefulWidget {
   const SecaoPrincipal({super.key});
@@ -17,8 +17,6 @@ class SecaoPrincipal extends StatefulWidget {
 class _EstadoSecaoPrincipal extends State<SecaoPrincipal>
     with TickerProviderStateMixin {
   late AnimationController _pulso;
-
-  final _avatarKey = GlobalKey();
 
   @override
   void initState() {
@@ -66,10 +64,7 @@ class _EstadoSecaoPrincipal extends State<SecaoPrincipal>
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    RepaintBoundary(
-                      key: _avatarKey,
-                      child: _AvatarAnimado(pulso: _pulso),
-                    ),
+                    RepaintBoundary(child: _AvatarAnimado(pulso: _pulso)),
                     const SizedBox(height: 32),
                     Text(
                       'Miriã Evangelista',
@@ -205,7 +200,8 @@ class _EstadoParticulasFlutuantes extends State<_ParticulasFlutuantes>
           builder: (_, restricoes) => Stack(
             children: _particulas.map((p) {
               final deslocamentoY = sin(tempo * p.velocidade + p.fase) * 14;
-              final transparencia = p.opacidade *
+              final transparencia =
+                  p.opacidade *
                   (0.55 + 0.45 * sin(tempo * p.velocidade + p.fase + pi / 2));
               return Positioned(
                 left: p.x * restricoes.maxWidth,
@@ -380,10 +376,15 @@ class _AvatarAnimado extends StatelessWidget {
             height: tamanho,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: Cores.purple500.withAlpha(128), width: 4),
+              border: Border.all(
+                color: Cores.purple500.withAlpha(128),
+                width: 4,
+              ),
               boxShadow: [
                 BoxShadow(
-                  color: Cores.purple500.withAlpha((60 + 80 * pulso.value).round()),
+                  color: Cores.purple500.withAlpha(
+                    (60 + 80 * pulso.value).round(),
+                  ),
                   blurRadius: 40,
                   spreadRadius: 4,
                 ),
@@ -426,16 +427,11 @@ class _BotaoSocial extends StatefulWidget {
 class _EstadoBotaoSocial extends State<_BotaoSocial> {
   bool _pairando = false;
 
-  Future<void> _abrir() async {
-    final uri = Uri.parse(widget.url);
-    if (await canLaunchUrl(uri)) await launchUrl(uri);
-  }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onHover: (pairando) => setState(() => _pairando = pairando),
-      onTap: _abrir,
+      onTap: () => abrirLink(widget.url),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         width: 48,

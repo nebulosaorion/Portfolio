@@ -175,10 +175,7 @@ class ChipHabilidade extends StatelessWidget {
       ),
       child: Text(
         rotulo,
-        style: TextStyle(
-          fontSize: pequeno ? 11 : 13,
-          color: Cores.purple200,
-        ),
+        style: TextStyle(fontSize: pequeno ? 11 : 13, color: Cores.purple200),
       ),
     );
   }

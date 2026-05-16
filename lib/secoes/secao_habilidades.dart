@@ -1,52 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../dados/habilidades.dart';
+import '../modelos/categoria_habilidade.dart';
+import '../modelos/habilidade.dart';
 import '../tema.dart';
 import 'compartilhado.dart';
 
-const _cdnDevicons = 'https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/';
-
-class _Habilidade {
-  final String nome;
-  final String? url;
-  final bool filtrosBranco;
-
-  const _Habilidade(this.nome, {this.url, this.filtrosBranco = false});
-}
-
-class _Categoria {
-  final String rotulo;
-  final IconData icone;
-  final List<_Habilidade> habilidades;
-
-  const _Categoria(this.rotulo, this.icone, this.habilidades);
-}
-
 class SecaoHabilidades extends StatelessWidget {
   const SecaoHabilidades({super.key});
-
-  static const _categorias = [
-    _Categoria('Linguagens', Icons.code, [
-      _Habilidade('Python',     url: '${_cdnDevicons}python/python-original.svg'),
-      _Habilidade('Dart',       url: '${_cdnDevicons}dart/dart-original-wordmark.svg'),
-      _Habilidade('C',          url: '${_cdnDevicons}c/c-original.svg'),
-      _Habilidade('Go',         url: '${_cdnDevicons}go/go-original.svg'),
-      _Habilidade('JavaScript', url: '${_cdnDevicons}javascript/javascript-original.svg'),
-      _Habilidade('HTML5',      url: '${_cdnDevicons}html5/html5-original.svg'),
-      _Habilidade('CSS3',       url: '${_cdnDevicons}css3/css3-plain-wordmark.svg'),
-    ]),
-    _Categoria('Frameworks & Ferramentas', Icons.terminal, [
-      _Habilidade('FastAPI',  url: '${_cdnDevicons}fastapi/fastapi-plain-wordmark.svg'),
-      _Habilidade('Flutter',  url: '${_cdnDevicons}flutter/flutter-plain.svg'),
-      _Habilidade('ROS2',     url: '${_cdnDevicons}ros/ros-original-wordmark.svg'),
-      _Habilidade('Docker',   url: '${_cdnDevicons}docker/docker-original-wordmark.svg'),
-      _Habilidade('MongoDB',  url: '${_cdnDevicons}mongodb/mongodb-original-wordmark.svg'),
-      _Habilidade('Git',      url: '${_cdnDevicons}git/git-original-wordmark.svg'),
-      _Habilidade('GitHub',   url: '${_cdnDevicons}github/github-original.svg', filtrosBranco: true),
-      _Habilidade('Linux',    url: '${_cdnDevicons}linux/linux-original.svg'),
-      _Habilidade('Canva',    url: '${_cdnDevicons}canva/canva-original.svg'),
-      _Habilidade('Figma',    url: '${_cdnDevicons}figma/figma-original.svg'),
-    ]),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +16,7 @@ class SecaoHabilidades extends StatelessWidget {
         children: [
           const TituloSecao(texto: 'Habilidades Técnicas'),
           const SizedBox(height: 48),
-          ..._categorias.map((c) => _BlocoCategoria(categoria: c)),
+          ...categoriasHabilidade.map((c) => _BlocoCategoria(categoria: c)),
         ],
       ),
     );
@@ -63,7 +24,7 @@ class SecaoHabilidades extends StatelessWidget {
 }
 
 class _BlocoCategoria extends StatelessWidget {
-  final _Categoria categoria;
+  final CategoriaHabilidade categoria;
   const _BlocoCategoria({required this.categoria});
 
   @override
@@ -102,7 +63,7 @@ class _BlocoCategoria extends StatelessWidget {
 }
 
 class _CartaoHabilidade extends StatefulWidget {
-  final _Habilidade habilidade;
+  final Habilidade habilidade;
   const _CartaoHabilidade({required this.habilidade});
 
   @override
@@ -126,7 +87,9 @@ class _EstadoCartaoHabilidade extends State<_CartaoHabilidade> {
           width: 88,
           height: 96,
           decoration: BoxDecoration(
-            color: _pairando ? const Color(0xFF334155) : const Color(0xFF1E293B),
+            color: _pairando
+                ? const Color(0xFF334155)
+                : const Color(0xFF1E293B),
             borderRadius: BorderRadius.circular(14),
             border: Border.all(
               color: _pairando
@@ -135,7 +98,13 @@ class _EstadoCartaoHabilidade extends State<_CartaoHabilidade> {
               width: 1.5,
             ),
             boxShadow: _pairando
-                ? [BoxShadow(color: Cores.purple500.withAlpha(90), blurRadius: 20, spreadRadius: 2)]
+                ? [
+                    BoxShadow(
+                      color: Cores.purple500.withAlpha(90),
+                      blurRadius: 20,
+                      spreadRadius: 2,
+                    ),
+                  ]
                 : [],
           ),
           child: Column(
@@ -166,10 +135,14 @@ class _EstadoCartaoHabilidade extends State<_CartaoHabilidade> {
 }
 
 class _LogoHabilidade extends StatelessWidget {
-  final _Habilidade habilidade;
+  final Habilidade habilidade;
   const _LogoHabilidade({required this.habilidade});
 
-  static const _iconeReserva = Icon(Icons.code, color: Cores.purple400, size: 36);
+  static const _iconeReserva = Icon(
+    Icons.code,
+    color: Cores.purple400,
+    size: 36,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -189,11 +162,14 @@ class _LogoHabilidade extends StatelessWidget {
           child: SizedBox(
             width: 16,
             height: 16,
-            child: CircularProgressIndicator(strokeWidth: 1.5, color: Cores.purple400),
+            child: CircularProgressIndicator(
+              strokeWidth: 1.5,
+              color: Cores.purple400,
+            ),
           ),
         ),
       ),
-      errorBuilder: (_, __, ___) => _iconeReserva,
+      errorBuilder: (_, erro, stackTrace) => _iconeReserva,
     );
   }
 }
