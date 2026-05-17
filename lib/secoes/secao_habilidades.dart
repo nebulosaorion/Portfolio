@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../dados/habilidades.dart';
 import '../modelos/categoria_habilidade.dart';
 import '../modelos/habilidade.dart';
@@ -137,85 +138,35 @@ class _LogoHabilidade extends StatelessWidget {
   final Habilidade habilidade;
   const _LogoHabilidade({required this.habilidade});
 
-  static const _coresLogo = [
-    Color(0xFF38BDF8),
-    Color(0xFF22C55E),
-    Color(0xFFF59E0B),
-    Color(0xFFF43F5E),
-    Color(0xFFA78BFA),
-    Color(0xFF14B8A6),
-  ];
-
-  static const _icones = {
-    'Python': Icons.data_object,
-    'Dart': Icons.flutter_dash,
-    'C': Icons.memory,
-    'Go': Icons.bolt,
-    'JavaScript': Icons.javascript,
-    'HTML5': Icons.language,
-    'CSS3': Icons.brush,
-    'FastAPI': Icons.api,
-    'Flutter': Icons.phone_iphone,
-    'ROS2': Icons.precision_manufacturing,
-    'Docker': Icons.inventory_2,
-    'MongoDB': Icons.storage,
-    'Git': Icons.account_tree,
-    'GitHub': Icons.code,
-    'Linux': Icons.terminal,
-    'Canva': Icons.palette,
-    'Figma': Icons.design_services,
-  };
-
-  int _indiceCor(String nome) {
-    var soma = 0;
-    for (final codigo in nome.codeUnits) {
-      soma += codigo;
-    }
-    return soma % _coresLogo.length;
-  }
-
-  String _rotulo(String nome) {
-    final partes = nome
-        .split(RegExp(r'\s+'))
-        .where((parte) => parte.isNotEmpty)
-        .toList();
-
-    if (partes.length >= 2) {
-      return '${partes.first[0]}${partes.last[0]}'.toUpperCase();
-    }
-
-    final normalizado = nome.replaceAll(RegExp(r'[^A-Za-z0-9]'), '');
-    if (normalizado.isEmpty) return '?';
-    return normalizado.substring(0, normalizado.length >= 2 ? 2 : 1).toUpperCase();
-  }
+  static const _iconeReserva = Icon(
+    Icons.flutter_dash,
+    color: Colors.white,
+    size: 24,
+  );
 
   @override
   Widget build(BuildContext context) {
-    final cor = _coresLogo[_indiceCor(habilidade.nome)];
-    final icone = _icones[habilidade.nome];
-
     return Container(
       width: 44,
       height: 44,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [cor.withAlpha(230), cor.withAlpha(150)],
-        ),
+        color: const Color(0xFF0F172A),
         border: Border.all(color: Colors.white.withAlpha(35)),
       ),
       child: Center(
-        child: icone != null
-            ? Icon(icone, color: Colors.white, size: 24)
-            : Text(
-                _rotulo(habilidade.nome),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 0.4,
+        child: habilidade.svgPath == null
+            ? _iconeReserva
+            : Padding(
+                padding: const EdgeInsets.all(6),
+                child: SvgPicture.asset(
+                  habilidade.svgPath!,
+                  width: 32,
+                  height: 32,
+                  fit: BoxFit.contain,
+                  colorFilter: habilidade.filtrosBranco
+                      ? const ColorFilter.mode(Colors.white, BlendMode.srcIn)
+                      : null,
                 ),
               ),
       ),

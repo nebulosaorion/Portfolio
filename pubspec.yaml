@@ -12,6 +12,7 @@ dependencies:
   url_launcher: ^6.3.0
   font_awesome_flutter: ^10.8.0
   google_fonts: ^6.2.1
+  flutter_svg: ^2.0.17
 
 dev_dependencies:
   flutter_test:
@@ -22,3 +23,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/perfil.png
+    - assets/skills/
