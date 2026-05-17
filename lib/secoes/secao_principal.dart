@@ -398,15 +398,28 @@ class _AvatarAnimado extends StatelessWidget {
           Positioned(
             bottom: 8,
             right: 8,
-            child: Container(
-              width: 44,
-              height: 44,
-              decoration: BoxDecoration(
-                color: Cores.purple600,
-                shape: BoxShape.circle,
-                border: Border.all(color: const Color(0xFF020617), width: 3),
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () => abrirLink('https://github.com/nebulosaorion/Portfolio'),
+                  customBorder: const CircleBorder(),
+                  child: Container(
+                    width: 44,
+                    height: 44,
+                    decoration: BoxDecoration(
+                      color: Cores.purple600,
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: const Color(0xFF020617),
+                        width: 3,
+                      ),
+                    ),
+                    child: const Icon(Icons.code, color: Colors.white, size: 20),
+                  ),
+                ),
               ),
-              child: const Icon(Icons.code, color: Colors.white, size: 20),
             ),
           ),
         ],
